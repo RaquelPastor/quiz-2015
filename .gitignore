@@ -45,6 +45,7 @@ Temporary Items
 node_modules
 *.bak
 npm-debug.log
+.env
 
 # Data Base Sqlite
 quiz.sqlite
