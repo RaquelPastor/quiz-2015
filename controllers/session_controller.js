@@ -7,6 +7,15 @@ exports.new = function(req,res) {
 	
 };
 
+//MW de autorizacion de accesos HTTP restringidos
+exports.loginRequired = function (req, res, next){
+	if(req.session.user){
+		next();
+	}else {
+		res.redirect('/login');
+	}
+};
+
 //POST /login - Crear sesion
 exports.create = function (req, res	) {
 	var login = req.body.login;
