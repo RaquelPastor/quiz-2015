@@ -13,13 +13,14 @@ router.get('/', function(req, res) {
 
 //Autoload de comandos con : quizId
 router.param('quizId', quizController.load); // autoload : quizId
+router.param('commentId', commentController.load) //autolias : commmentId
 
-//definición de rutas de sesion
+//Definición de rutas de sesion
 router.get('/login', sessionController.new); //formulario login
 router.post('/login', sessionController.create); //crear session
 router.get('/logout', sessionController.destroy); //destruir sesion
 
-//definicion de rutas de quizes
+//Definicion de rutas de quizes
 router.get('/quizes',  quizController.index);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
@@ -30,8 +31,9 @@ router.put('/quizes/:quizId(\\d+)',  sessionController.loginRequired, quizContro
 router.delete('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.destroy);
 router.get('/author', quizController.author);
 
-//definicion de rutas de comentarios
+//Definicion de rutas de comentarios
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
 
 module.exports = router;
