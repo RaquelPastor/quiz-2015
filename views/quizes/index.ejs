@@ -1,4 +1,14 @@
-﻿<table>
+﻿<form method="get" action="/quizes">
+<div style="text-align:right;">
+	<label for="busq" class="rem">Búsqueda:</label>
+	<input type="text" id="busq" name="search" value="buscar..."/> 
+	<button type="submit">buscar</button>
+</div>
+</form>
+
+
+<table>
+
 <tr>	
 		<td>Temática</td>
 		<td>Pregunta</a></td>
@@ -6,7 +16,6 @@
 	</tr>
 	<tr>	
 		<td colspan="5">--------------------------------------------------------------------------------------------</td>
-		
 	</tr>
 <% var i; for(i=0; i<quizes.length; i++) { %>
 	

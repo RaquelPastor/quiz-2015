@@ -16,11 +16,26 @@ exports.load = function(req,res,next,quizId){
 
 //GET /quizes
 exports.index = function(req, res) {
-	models.Quiz.findAll().then(
-		function(quizes) {
-			res.render('quizes/index', {quizes: quizes, errors: []});
-		}
+	//models.Quiz.findAll().then(
+		//function(quizes) {
+		//	res.render('quizes/index', {quizes: quizes, errors: []});
+		//}
+	//).catch(function(error) {next(error);})
+	
+	var search_text = '';
+	var condition ={};
+	
+	if(req.query.search != undefined){
+			search = '%' + req.query.search.split(/\s+/).join('%') + '%';	
+			condition = {where: ['pregunta LIKE ?', search]};
+		//	search = req.query.search;
+	}
+	
+	models.Quiz.findAll(condition).then(function(quizes){
+		res.render('quizes/index', {quizes:quizes, errors: []});
+	}
 	).catch(function(error) {next(error);})
+	
 };
 
 // GET  /quizes/show
@@ -106,3 +121,4 @@ exports.destroy = function(req, res) {
 exports.author = function(req, res) {
 		res.render('author', { errors: [] });
 };
+
